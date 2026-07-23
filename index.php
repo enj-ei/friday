@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trekking Adventure - Home</title>
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/footer.css">
+</head>
+<body>
+
+    <?php include 'includes/navbar.php'; ?>
+
+    <!-- Banner Slider -->
+    <section class="slider-container">
+        <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://picsum.photos/1200/500?random=1');">
+            <div class="slide-text">
+                <h1>Discover New Heights</h1>
+                <p>Unforgettable trekking experiences await you.</p>
+            </div>
+        </div>
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://picsum.photos/1200/500?random=2');">
+            <div class="slide-text">
+                <h1>Explore the Wild</h1>
+                <p>Guided adventure tours across stunning trails.</p>
+            </div>
+        </div>
+    </section>
+
+    <?php include 'includes/footer.php'; ?>
+
+    <script src="js/slider.js"></script>
+</body>
+</html>
