@@ -1,6 +1,6 @@
 <nav class="navbar">
     <div class="logo">
-        <a href="index.php">Trekking<span>Adventure</span></a>
+        <a href="index.php">Tive<span>Travels</span></a>
     </div>
     <ul class="nav-links">
         <li><a href="index.php">Home</a></li>

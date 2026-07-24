@@ -26,7 +26,7 @@ if (isset($_POST['register'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register - Trekking Adventure</title>
+    <title>Register - Tive Travels</title>
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/footer.css">
     <style>

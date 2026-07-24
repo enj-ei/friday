@@ -33,7 +33,7 @@ if (isset($_POST['login'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login - Trekking Adventure</title>
+    <title>Login - Tive Travels</title>
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/footer.css">
     <style>

@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Contact Us - Trekking Adventure</title>
+    <title>Contact Us - Tive travels</title>
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/contact.css">
     <link rel="stylesheet" href="css/footer.css">

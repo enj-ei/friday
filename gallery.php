@@ -21,12 +21,12 @@
     <div class="gallery-container">
         <h1>Moments From Our Treks</h1>
         <div class="gallery-grid">
-            <div class="gallery-item"><img src="https://picsum.photos/400/400?random=30" alt="Trek 1"></div>
-            <div class="gallery-item"><img src="https://picsum.photos/400/400?random=31" alt="Trek 2"></div>
-            <div class="gallery-item"><img src="https://picsum.photos/400/400?random=32" alt="Trek 3"></div>
-            <div class="gallery-item"><img src="https://picsum.photos/400/400?random=33" alt="Trek 4"></div>
-            <div class="gallery-item"><img src="https://picsum.photos/400/400?random=34" alt="Trek 5"></div>
-            <div class="gallery-item"><img src="https://picsum.photos/400/400?random=35" alt="Trek 6"></div>
+            <div class="gallery-item"><img src="IMG_6504.JPG" alt="Trek 1"></div>
+            <div class="gallery-item"><img src="20260612143332423.jpg" alt="Trek 2"></div>
+            <div class="gallery-item"><img src="IMG_9956.PNG" alt="Trek 3"></div>
+            <div class="gallery-item"><img src="IMG_4682.JPG" alt="Trek 4"></div>
+            <div class="gallery-item"><img src="IMG_0133.PNG" alt="Trek 5"></div>
+            <div class="gallery-item"><img src="IMG_9956.PNG" alt="Trek 6"></div>
         </div>
     </div>
 

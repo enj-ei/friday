@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>About Us - Trekking Adventure</title>
+    <title>About Us - Tive Travels</title>
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/footer.css">
     <style>
@@ -19,8 +19,8 @@
     <?php include 'includes/navbar.php'; ?>
 
     <section class="about-section">
-        <h1>About Trekking Adventure</h1>
-        <p>Welcome to Trekking Adventure! We specialize in providing unforgettable high-altitude trekking experiences, adventure tours, and eco-friendly mountain expeditions.</p>
+        <h1>About Tive travels</h1>
+        <p>Welcome to Tive travels! We specialize in providing unforgettable high-altitude trekking experiences, adventure tours, and eco-friendly mountain expeditions.</p>
         <p>Our team of experienced guides ensures that your trip is safe, memorable, and customized to your skill level. Whether you are seeking a challenging trail or a peaceful scenic walk, we have something for every traveler.</p>
 
         <div class="features">

@@ -18,7 +18,7 @@ $bookings_res = $conn->query("SELECT * FROM bookings WHERE user_id = '$user_id' 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Profile - Trekking Adventure</title>
+    <title>My Profile - Tive Travels</title>
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/footer.css">
     <style>
