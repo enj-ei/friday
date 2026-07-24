@@ -46,6 +46,33 @@
             </div>
         </div>
     </div>
+    <div class="card">
+                <img src="https://picsum.photos/500/300?random=22" alt="Langtang Valley">
+                <div class="card-body">
+                    <h3>Sailung Valley</h3>
+                    <p>Closest trekking region from the capital, offering beautiful valley trails, Tamang heritage, and serene landscapes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+                <img src="https://picsum.photos/500/300?random=22" alt="Langtang Valley">
+                <div class="card-body">
+                    <h3>Anjee Valley</h3>
+                    <p>Closest trekking region from the capital, offering beautiful valley trails, Tamang heritage, and serene landscapes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+                <img src="https://picsum.photos/500/300?random=22" alt="Langtang Valley">
+                <div class="card-body">
+                    <h3>Yanzz Valley</h3>
+                    <p>Closest trekking region from the capital, offering beautiful valley trails, Tamang heritage, and serene landscapes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <?php include 'includes/footer.php'; ?>
 </body>
