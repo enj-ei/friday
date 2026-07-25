@@ -5,3 +5,4 @@
     </div>
 </footer>
 <script src="js/transition.js"></script>
+<script src="js/user-menu.js"></script>

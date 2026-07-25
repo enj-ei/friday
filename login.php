@@ -23,8 +23,19 @@ if (isset($_POST['login'])) {
             } else {
                 if (isset($_SESSION['pending_booking'])) {
                     $pb = $_SESSION['pending_booking'];
-                    $insert = $conn->prepare("INSERT INTO bookings (user_id, package_name, booking_date, status) VALUES (?, ?, ?, 'pending')");
-                    $insert->bind_param("iss", $user['id'], $pb['package_name'], $pb['booking_date']);
+                    $insert = $conn->prepare("INSERT INTO bookings (user_id, package_name, num_people, phone, hotel_name, nights, accommodation_total, total_price, booking_date, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')");
+                    $insert->bind_param(
+                        "isissiids",
+                        $user['id'],
+                        $pb['package_name'],
+                        $pb['num_people'],
+                        $pb['phone'],
+                        $pb['hotel_name'],
+                        $pb['nights'],
+                        $pb['accommodation_total'],
+                        $pb['total_price'],
+                        $pb['booking_date']
+                    );
                     $insert->execute();
                     unset($_SESSION['pending_booking']);
                     header("Location: profile.php?booked=1");

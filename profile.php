@@ -79,7 +79,7 @@ $bookings_res = $stmt2->get_result();
             <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
         </div>
 
-        <div class="booking-history" style="margin-bottom: 2rem;">
+        <div class="booking-history" id="bookings" style="margin-bottom: 2rem; scroll-margin-top: 90px;">
             <h3>My Bookings</h3>
             <table>
                 <thead>

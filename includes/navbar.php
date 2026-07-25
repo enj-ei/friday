@@ -13,8 +13,19 @@
     </ul>
     <div class="nav-auth">
         <?php if (isset($_SESSION['user_id'])): ?>
-            <a href="profile.php" class="btn-login">My Profile</a>
-            <a href="logout.php" class="btn-register">Logout</a>
+            <div class="user-menu">
+                <button class="user-menu-trigger" id="userMenuTrigger">
+                    <span class="user-avatar"><?php echo strtoupper(substr($_SESSION['user_name'], 0, 1)); ?></span>
+                    <span class="user-name-label"><?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
+                    <span class="user-chevron">▾</span>
+                </button>
+                <div class="user-menu-dropdown" id="userMenuDropdown">
+                    <a href="profile.php#bookings">📖 My Bookings</a>
+                    <a href="profile.php">👤 My Profile</a>
+                    <div class="user-menu-divider"></div>
+                    <a href="logout.php" class="logout-link">🚪 Logout</a>
+                </div>
+            </div>
         <?php else: ?>
             <a href="login.php" class="btn-login">Login</a>
             <a href="register.php" class="btn-register">Register</a>

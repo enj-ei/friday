@@ -14,10 +14,15 @@ if (isset($_POST['add_package'])) {
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $duration = mysqli_real_escape_string($conn, $_POST['duration']);
     $difficulty = mysqli_real_escape_string($conn, $_POST['difficulty']);
+    $category = mysqli_real_escape_string($conn, $_POST['category']);
+    $location = mysqli_real_escape_string($conn, $_POST['location']);
+    $description = mysqli_real_escape_string($conn, $_POST['description']);
+    $max_group = (int) $_POST['max_group'];
+    $featured = isset($_POST['featured']) ? 1 : 0;
     $price = (float) $_POST['price'];
 
-    $stmt = $conn->prepare("INSERT INTO packages (name, duration, difficulty, price) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("sssd", $name, $duration, $difficulty, $price);
+    $stmt = $conn->prepare("INSERT INTO packages (name, duration, difficulty, category, location, description, max_group, featured, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssiid", $name, $duration, $difficulty, $category, $location, $description, $max_group, $featured, $price);
     if ($stmt->execute()) {
         $message = "Package added successfully!";
     } else {
@@ -84,7 +89,7 @@ $packages = $conn->query("SELECT * FROM packages ORDER BY id DESC");
 
             <table>
                 <thead>
-                    <tr><th>ID</th><th>Name</th><th>Duration</th><th>Difficulty</th><th>Price</th><th>Action</th></tr>
+                    <tr><th>ID</th><th>Name</th><th>Category</th><th>Location</th><th>Duration</th><th>Group</th><th>Price</th><th>Featured</th><th>Action</th></tr>
                 </thead>
                 <tbody>
                     <?php if ($packages && $packages->num_rows > 0): ?>
@@ -92,14 +97,17 @@ $packages = $conn->query("SELECT * FROM packages ORDER BY id DESC");
                             <tr>
                                 <td>#<?php echo $p['id']; ?></td>
                                 <td><?php echo htmlspecialchars($p['name']); ?></td>
+                                <td><?php echo htmlspecialchars($p['category']); ?></td>
+                                <td><?php echo htmlspecialchars($p['location']); ?></td>
                                 <td><?php echo htmlspecialchars($p['duration']); ?></td>
-                                <td><?php echo htmlspecialchars($p['difficulty']); ?></td>
+                                <td>Max <?php echo htmlspecialchars($p['max_group']); ?></td>
                                 <td>$<?php echo htmlspecialchars($p['price']); ?></td>
+                                <td><?php echo $p['featured'] ? '⭐ Yes' : 'No'; ?></td>
                                 <td><a class="btn-delete" href="packages.php?delete=<?php echo $p['id']; ?>" onclick="return confirm('Delete this package?');">Delete</a></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
-                        <tr><td colspan="6">No packages found.</td></tr>
+                        <tr><td colspan="9">No packages found.</td></tr>
                     <?php endif; ?>
                 </tbody>
             </table>
@@ -117,7 +125,23 @@ $packages = $conn->query("SELECT * FROM packages ORDER BY id DESC");
                             <option value="Hard">Hard</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select name="category" required>
+                            <option value="Trekking">Trekking</option>
+                            <option value="Cultural">Cultural</option>
+                            <option value="Heritage">Heritage</option>
+                            <option value="Pilgrimage">Pilgrimage</option>
+                            <option value="Nature">Nature</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Location</label><input type="text" name="location" placeholder="e.g. Solukhumbu, Everest Region" required></div>
+                    <div class="form-group"><label>Short Description</label><textarea name="description" rows="3" required></textarea></div>
+                    <div class="form-group"><label>Max Group Size</label><input type="number" name="max_group" value="10" required></div>
                     <div class="form-group"><label>Price (USD)</label><input type="number" step="0.01" name="price" required></div>
+                    <div class="form-group">
+                        <label><input type="checkbox" name="featured" style="width:auto;"> Mark as Featured</label>
+                    </div>
                     <button type="submit" name="add_package" class="btn-add">Add Package</button>
                 </form>
             </div>
