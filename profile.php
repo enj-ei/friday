@@ -11,14 +11,15 @@ $user_id = $_SESSION['user_id'];
 $review_status = "";
 
 if (isset($_POST['submit_review'])) {
+    $package_name = trim($_POST['package_name']);
     $comment = trim($_POST['comment']);
     $rating = (int) $_POST['rating'];
 
-    if ($comment === '' || $rating < 1 || $rating > 5) {
-        $review_status = "error:Please write a comment and select a rating between 1 and 5.";
+    if ($package_name === '' || $comment === '' || $rating < 1 || $rating > 5) {
+        $review_status = "error:Please select a package, write a comment, and choose a rating.";
     } else {
-        $stmt = $conn->prepare("INSERT INTO reviews (user_id, comment, rating) VALUES (?, ?, ?)");
-        $stmt->bind_param("isi", $user_id, $comment, $rating);
+        $stmt = $conn->prepare("INSERT INTO reviews (user_id, package_name, comment, rating) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("issi", $user_id, $package_name, $comment, $rating);
         if ($stmt->execute()) {
             $review_status = "success:Thank you! Your review has been posted.";
         } else {
@@ -36,7 +37,13 @@ $stmt2 = $conn->prepare("SELECT * FROM bookings WHERE user_id = ? ORDER BY id DE
 $stmt2->bind_param("i", $user_id);
 $stmt2->execute();
 $bookings_res = $stmt2->get_result();
+
+$booked_packages_stmt = $conn->prepare("SELECT DISTINCT package_name FROM bookings WHERE user_id = ? ORDER BY package_name ASC");
+$booked_packages_stmt->bind_param("i", $user_id);
+$booked_packages_stmt->execute();
+$booked_packages = $booked_packages_stmt->get_result();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,6 +125,18 @@ $bookings_res = $stmt2->get_result();
                 </p>
             <?php endif; ?>
             <form method="POST" action="profile.php">
+                <div class="form-group">
+                    <label>Which package are you reviewing?</label>
+                    <select name="package_name" required>
+                        <option value="">-- Select a package --</option>
+                        <?php if ($booked_packages && $booked_packages->num_rows > 0):
+                            while ($bp = $booked_packages->fetch_assoc()): ?>
+                            <option value="<?php echo htmlspecialchars($bp['package_name']); ?>"><?php echo htmlspecialchars($bp['package_name']); ?></option>
+                        <?php endwhile; else: ?>
+                            <option value="" disabled>You haven't booked any packages yet</option>
+                        <?php endif; ?>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label>Rating</label>
                     <select name="rating" required>

@@ -112,6 +112,7 @@ if (isset($_POST['send_message'])) {
         .review-stars { color: #f39c12; font-size: 1.1rem; margin-bottom: 0.6rem; }
         .review-text { color: #444; font-style: italic; margin-bottom: 0.8rem; line-height: 1.4; }
         .review-author { color: #e67e22; font-weight: 600; font-size: 0.9rem; }
+        .review-package { color: #999; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.4rem; }
 
         .contact-hero {
             background: linear-gradient(135deg, #e67e22, #d35400);
@@ -326,12 +327,15 @@ if (isset($_POST['send_message'])) {
         <h2>What Our Trekkers Say</h2>
         <div class="reviews-grid">
             <?php
-            $home_reviews = $conn->query("SELECT reviews.comment, reviews.rating, users.name FROM reviews JOIN users ON reviews.user_id = users.id ORDER BY reviews.created_at DESC LIMIT 6");
+            $home_reviews = $conn->query("SELECT reviews.comment, reviews.rating, reviews.package_name, users.name FROM reviews JOIN users ON reviews.user_id = users.id ORDER BY reviews.created_at DESC LIMIT 6");
             if ($home_reviews && $home_reviews->num_rows > 0):
                 while ($r = $home_reviews->fetch_assoc()):
             ?>
             <div class="review-card">
                 <p class="review-stars"><?php echo str_repeat('★', $r['rating']) . str_repeat('☆', 5 - $r['rating']); ?></p>
+                <?php if (!empty($r['package_name'])): ?>
+                    <p class="review-package"><?php echo htmlspecialchars($r['package_name']); ?></p>
+                <?php endif; ?>
                 <p class="review-text">"<?php echo htmlspecialchars($r['comment']); ?>"</p>
                 <p class="review-author">— <?php echo htmlspecialchars($r['name']); ?></p>
             </div>
