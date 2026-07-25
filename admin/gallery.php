@@ -13,16 +13,32 @@ $message = "";
 if (isset($_POST['upload_image'])) {
     $caption = mysqli_real_escape_string($conn, $_POST['caption']);
     $target_dir = "../images/";
-    $file_name = basename($_FILES["image"]["name"]);
-    $target_file = $target_dir . $file_name;
 
-    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-        $sql = "INSERT INTO gallery (image_path, caption) VALUES ('images/$file_name', '$caption')";
-        if ($conn->query($sql) === TRUE) {
-            $message = "Photo uploaded successfully!";
-        }
+    $allowed_ext = ['jpg', 'jpeg', 'png', 'webp'];
+    $original_name = basename($_FILES["image"]["name"]);
+    $ext = strtolower(pathinfo($original_name, PATHINFO_EXTENSION));
+
+    $img_info = getimagesize($_FILES["image"]["tmp_name"]);
+
+    if (!in_array($ext, $allowed_ext) || $img_info === false) {
+        $message = "Only JPG, PNG, or WEBP image files are allowed.";
     } else {
-        $message = "Failed to upload photo.";
+        // Generate a unique, safe filename instead of trusting the uploaded name
+        $file_name = uniqid('gallery_', true) . '.' . $ext;
+        $target_file = $target_dir . $file_name;
+
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+            $stmt = $conn->prepare("INSERT INTO gallery (image_path, caption) VALUES (?, ?)");
+            $image_path = "images/$file_name";
+            $stmt->bind_param("ss", $image_path, $caption);
+            if ($stmt->execute()) {
+                $message = "Photo uploaded successfully!";
+            } else {
+                $message = "Database error while saving photo.";
+            }
+        } else {
+            $message = "Failed to upload photo.";
+        }
     }
 }
 ?>
@@ -57,6 +73,7 @@ if (isset($_POST['upload_image'])) {
                 <li><a href="packages.php">Manage Packages</a></li>
                 <li><a href="gallery.php">Gallery</a></li>
                 <li><a href="reviews.php">Reviews</a></li>
+                <li><a href="messages.php">Messages</a></li>
                 <li><a href="users.php">Users</a></li>
                 <li><a href="logout.php">Logout</a></li>
             </ul>

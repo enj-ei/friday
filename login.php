@@ -4,10 +4,13 @@ include 'includes/connection.php';
 $error = "";
 
 if (isset($_POST['login'])) {
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    $result = $conn->query("SELECT * FROM users WHERE email = '$email'");
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
         if (password_verify($password, $user['password'])) {
@@ -18,7 +21,16 @@ if (isset($_POST['login'])) {
             if ($user['role'] === 'admin') {
                 header("Location: admin/dashboard.php");
             } else {
-                header("Location: index.php");
+                if (isset($_SESSION['pending_booking'])) {
+                    $pb = $_SESSION['pending_booking'];
+                    $insert = $conn->prepare("INSERT INTO bookings (user_id, package_name, booking_date, status) VALUES (?, ?, ?, 'pending')");
+                    $insert->bind_param("iss", $user['id'], $pb['package_name'], $pb['booking_date']);
+                    $insert->execute();
+                    unset($_SESSION['pending_booking']);
+                    header("Location: profile.php?booked=1");
+                } else {
+                    header("Location: index.php");
+                }
             }
             exit();
         } else {

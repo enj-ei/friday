@@ -3,7 +3,7 @@ session_start();
 include '../includes/connection.php';
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../login.php");
+    header("Location: login.php");
     exit();
 }
 
@@ -37,6 +37,7 @@ $users = $conn->query("SELECT id, name, email, role, created_at FROM users ORDER
                 <li><a href="bookings.php">Bookings</a></li>
                 <li><a href="packages.php">Manage Packages</a></li>
                 <li><a href="reviews.php">Reviews</a></li>
+                <li><a href="messages.php">Messages</a></li>
                 <li><a href="users.php">Users</a></li>
                 <li><a href="../logout.php">Logout</a></li>
             </ul>

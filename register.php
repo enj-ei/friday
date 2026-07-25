@@ -8,12 +8,15 @@ if (isset($_POST['register'])) {
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
     // Check if email exists
-    $check_email = $conn->query("SELECT * FROM users WHERE email = '$email'");
-    if ($check_email->num_rows > 0) {
+    $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    if ($stmt->get_result()->num_rows > 0) {
         $message = "Email is already registered!";
     } else {
-        $sql = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')";
-        if ($conn->query($sql) === TRUE) {
+        $insert = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, 'user')");
+        $insert->bind_param("sss", $name, $email, $password);
+        if ($insert->execute()) {
             header("Location: login.php");
             exit();
         } else {

@@ -1,4 +1,7 @@
-<?php include 'includes/connection.php'; ?>
+<?php
+session_start();
+include 'includes/connection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +26,7 @@
                     <h3>Everest Base Camp Trek</h3>
                     <p class="meta">14 Days | Difficulty: Hard</p>
                     <span class="price">$1,450</span>
-                    <a href="contact.php" class="btn-book">Book Now</a>
+                    <a href="booking.php" class="btn-book">Book Now</a>
                 </div>
             </div>
 
@@ -33,7 +36,7 @@
                     <h3>Annapurna Circuit</h3>
                     <p class="meta">12 Days | Difficulty: Moderate</p>
                     <span class="price">$1,100</span>
-                    <a href="contact.php" class="btn-book">Book Now</a>
+                    <a href="booking.php" class="btn-book">Book Now</a>
                 </div>
             </div>
 
@@ -43,7 +46,7 @@
                     <h3>Langtang Valley Trek</h3>
                     <p class="meta">8 Days | Difficulty: Easy</p>
                     <span class="price">$850</span>
-                    <a href="contact.php" class="btn-book">Book Now</a>
+                    <a href="booking.php" class="btn-book">Book Now</a>
                 </div>
             </div>
 

@@ -4,3 +4,4 @@
         <p>Explore the mountains with passion and safety.</p>
     </div>
 </footer>
+<script src="js/transition.js"></script>

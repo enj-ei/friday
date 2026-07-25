@@ -1,4 +1,7 @@
-<?php include 'includes/connection.php'; ?>
+<?php
+session_start();
+include 'includes/connection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,29 +40,32 @@
                     <p>Famous for diverse landscapes ranging from subtropical forests to arid high-altitude deserts and mountain vistas.</p>
                 </div>
             </div>
-            <div class="card">
+           <div class="card">
                 <img src="https://picsum.photos/500/300?random=22" alt="Langtang Valley">
                 <div class="card-body">
                     <h3>Langtang Valley</h3>
                     <p>Closest trekking region from the capital, offering beautiful valley trails, Tamang heritage, and serene landscapes.</p>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="card">
-                <img src="https://picsum.photos/500/300?random=22" alt="Langtang Valley">
+            <div class="card">
+                <img src="https://picsum.photos/500/300?random=23" alt="Sailung Valley">
                 <div class="card-body">
                     <h3>Sailung Valley</h3>
-                    <p>Closest trekking region from the capital, offering beautiful valley trails, Tamang heritage, and serene landscapes.</p>
+                    <p>A quiet hill-station trek known for panoramic Himalayan views, rhododendron forests, and peaceful camping spots.</p>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="card">
-                <img src="https://picsum.photos/500/300?random=22" alt="Langtang Valley">
+            <div class="card">
+                <img src="https://picsum.photos/500/300?random=24" alt="Anjee Valley">
                 <div class="card-body">
                     <h3>Anjee Valley</h3>
-                    <p>Closest trekking region from the capital, offering beautiful valley trails, Tamang heritage, and serene landscapes.</p>
+                    <p>A hidden gem offering terraced farmlands, traditional villages, and scenic ridge-top trails away from the crowds.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/500/300?random=25" alt="Yanzz Valley">
+                <div class="card-body">
+                    <h3>Yanzz Valley</h3>
+                    <p>A remote alpine valley popular with experienced trekkers for its dramatic passes and untouched natural beauty.</p>
                 </div>
             </div>
         </div>

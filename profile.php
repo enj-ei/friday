@@ -8,11 +8,16 @@ if (!is_logged_in()) {
 }
 
 $user_id = $_SESSION['user_id'];
-$user_res = $conn->query("SELECT * FROM users WHERE id = '$user_id'");
-$user = $user_res->fetch_assoc();
 
-// Get bookings for this user
-$bookings_res = $conn->query("SELECT * FROM bookings WHERE user_id = '$user_id' ORDER BY id DESC");
+$stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$user = $stmt->get_result()->fetch_assoc();
+
+$stmt2 = $conn->prepare("SELECT * FROM bookings WHERE user_id = ? ORDER BY id DESC");
+$stmt2->bind_param("i", $user_id);
+$stmt2->execute();
+$bookings_res = $stmt2->get_result();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +40,9 @@ $bookings_res = $conn->query("SELECT * FROM bookings WHERE user_id = '$user_id' 
     <?php include 'includes/navbar.php'; ?>
 
     <div class="profile-container">
+        <?php if (isset($_GET['booked']) && $_GET['booked'] == '1'): ?>
+            <p style="background:#d4edda;color:#155724;padding:0.75rem;border-radius:6px;margin-bottom:1rem;">Your booking has been received! Check your booking history below.</p>
+        <?php endif; ?>
         <div class="user-card">
             <h2>User Profile</h2>
             <p><strong>Name:</strong> <?php echo htmlspecialchars($user['name']); ?></p>

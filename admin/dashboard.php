@@ -4,7 +4,7 @@ include '../includes/connection.php';
 
 // Quick guard to protect admin dashboard
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../login.php");
+    header("Location: login.php");
     exit();
 }
 ?>
@@ -35,8 +35,11 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                 <li><a href="dashboard.php">Dashboard</a></li>
                 <li><a href="bookings.php">Bookings</a></li>
                 <li><a href="packages.php">Manage Packages</a></li>
+                <li><a href="gallery.php">Gallery</a></li>
+                <li><a href="reviews.php">Reviews</a></li>
+                <li><a href="messages.php">Messages</a></li>
                 <li><a href="users.php">Users</a></li>
-                <li><a href="../logout.php">Logout</a></li>
+                <li><a href="logout.php">Logout</a></li>
             </ul>
         </aside>
 

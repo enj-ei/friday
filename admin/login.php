@@ -4,10 +4,13 @@ include '../includes/connection.php';
 $error = "";
 
 if (isset($_POST['admin_login'])) {
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    $result = $conn->query("SELECT * FROM users WHERE email = '$email' AND role = 'admin'");
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ? AND role = 'admin'");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
     if ($result && $result->num_rows > 0) {
         $admin = $result->fetch_assoc();
         if (password_verify($password, $admin['password'])) {
