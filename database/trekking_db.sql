@@ -31,7 +31,7 @@ CREATE TABLE `bookings` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `bookings` (
 
 LOCK TABLES `bookings` WRITE;
 /*!40000 ALTER TABLE `bookings` DISABLE KEYS */;
-INSERT INTO `bookings` VALUES (1,1,'Annapurna Circuit','2026-07-26','pending'),(2,2,'Annapurna Circuit','2026-07-29','pending'),(3,2,'Everest Base Camp Trek','2026-07-27','pending');
+INSERT INTO `bookings` VALUES (1,1,'Annapurna Circuit','2026-07-26','pending'),(2,2,'Annapurna Circuit','2026-07-29','pending'),(3,2,'Everest Base Camp Trek','2026-07-27','pending'),(4,2,'Everest Base Camp Trek','2026-07-25','pending');
 /*!40000 ALTER TABLE `bookings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,7 +109,7 @@ CREATE TABLE `packages` (
   `difficulty` varchar(50) DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,7 +118,7 @@ CREATE TABLE `packages` (
 
 LOCK TABLES `packages` WRITE;
 /*!40000 ALTER TABLE `packages` DISABLE KEYS */;
-INSERT INTO `packages` VALUES (1,'Everest Base Camp Trek','14 Days','Hard',1450.00),(2,'Annapurna Circuit','12 Days','Moderate',1100.00),(3,'Langtang Valley Trek','8 Days','Easy',850.00);
+INSERT INTO `packages` VALUES (1,'Everest Base Camp Trek','14 Days','Hard',1450.00),(2,'Annapurna Circuit','12 Days','Moderate',1100.00),(3,'Langtang Valley Trek','8 Days','Easy',850.00),(4,'hero trek','2','Easy',100.00);
 /*!40000 ALTER TABLE `packages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +138,7 @@ CREATE TABLE `reviews` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,6 +147,7 @@ CREATE TABLE `reviews` (
 
 LOCK TABLES `reviews` WRITE;
 /*!40000 ALTER TABLE `reviews` DISABLE KEYS */;
+INSERT INTO `reviews` VALUES (1,2,'very good',5,'2026-07-25 15:12:59');
 /*!40000 ALTER TABLE `reviews` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,4 +189,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-07-25 20:38:10
+-- Dump completed on 2026-07-25 20:59:22

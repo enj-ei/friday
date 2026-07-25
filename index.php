@@ -62,6 +62,14 @@ if (isset($_POST['send_message'])) {
         .gallery-item { overflow: hidden; border-radius: 8px; }
         .gallery-item img { width: 100%; height: 200px; object-fit: cover; transition: transform 0.3s ease; display: block; }
         .gallery-item img:hover { transform: scale(1.05); cursor: pointer; }
+
+        .reviews-section { max-width: 1100px; margin: 3rem auto; padding: 0 5%; text-align: center; }
+        .reviews-section h2 { color: #2c3e50; margin-bottom: 2rem; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .review-card { background: #fff; padding: 1.5rem; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.06); text-align: left; }
+        .review-stars { color: #f39c12; font-size: 1.1rem; margin-bottom: 0.6rem; }
+        .review-text { color: #444; font-style: italic; margin-bottom: 0.8rem; line-height: 1.4; }
+        .review-author { color: #e67e22; font-weight: 600; font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -198,6 +206,29 @@ if (isset($_POST['send_message'])) {
                 <div class="gallery-item"><img src="IMG_0133.PNG" alt="Trek 5"></div>
                 <div class="gallery-item"><img src="IMG_9956.PNG" alt="Trek 6"></div>
             </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="reviews" class="reviews-section">
+        <h2>What Our Trekkers Say</h2>
+        <div class="reviews-grid">
+            <?php
+            $home_reviews = $conn->query("SELECT reviews.comment, reviews.rating, users.name FROM reviews JOIN users ON reviews.user_id = users.id ORDER BY reviews.created_at DESC LIMIT 6");
+            if ($home_reviews && $home_reviews->num_rows > 0):
+                while ($r = $home_reviews->fetch_assoc()):
+            ?>
+            <div class="review-card">
+                <p class="review-stars"><?php echo str_repeat('★', $r['rating']) . str_repeat('☆', 5 - $r['rating']); ?></p>
+                <p class="review-text">"<?php echo htmlspecialchars($r['comment']); ?>"</p>
+                <p class="review-author">— <?php echo htmlspecialchars($r['name']); ?></p>
+            </div>
+            <?php
+                endwhile;
+            else:
+            ?>
+            <p style="text-align:center; color:#666;">No reviews yet. Be the first to share your experience!</p>
+            <?php endif; ?>
         </div>
     </section>
 

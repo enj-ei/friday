@@ -1,5 +1,19 @@
 # Tive Travels — Setup Instructions (Windows)
 
+A PHP + MySQL trekking booking website with a customer-facing site and an
+admin panel.
+
+## Features
+- Browse trekking packages, destinations, and a photo gallery
+- Register / log in as a customer
+- Book a trekking package (choose from a dropdown or click "Book Now" on a
+  specific package)
+- View your booking history and leave a review from your Profile page
+- Public testimonials section showing customer reviews with star ratings
+- Contact form (messages are saved and viewable by the admin)
+- Admin panel to manage packages, bookings, users, reviews, gallery images,
+  and contact messages
+
 ## What you need
 Download and install **XAMPP** (includes PHP, MySQL, and phpMyAdmin all in one):
 https://www.apachefriends.org/download.html
@@ -58,12 +72,18 @@ Admin panel:
 http://localhost/friday/admin/login.php
 ```
 
-## Default admin login
+## Accounts
+
+**Admin** (manage packages, bookings, users, reviews, gallery, messages):
 
 | Field    | Value                     |
 |----------|---------------------------|
 | Email    | admin@tivetravels.com     |
 | Password | Admin@123                 |
+
+**Customer account:** register your own at
+`http://localhost/friday/register.php` to test booking a package and
+leaving a review.
 
 ## Notes
 

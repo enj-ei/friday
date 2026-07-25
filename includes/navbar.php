@@ -8,6 +8,7 @@
         <li><a href="index.php#destinations">Destinations</a></li>
         <li><a href="index.php#packages">Packages</a></li>
         <li><a href="index.php#gallery">Gallery</a></li>
+        <li><a href="index.php#reviews">Reviews</a></li>
         <li><a href="index.php#contact">Contact</a></li>
     </ul>
     <div class="nav-auth">
