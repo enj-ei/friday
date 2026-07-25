@@ -1,97 +1,161 @@
-# Tive Travels — Setup Instructions (Windows)
+# How to Run Tive Travels on Windows (Step-by-Step Guide)
 
-A PHP + MySQL trekking booking website with a customer-facing site and an
-admin panel.
+This guide is written for someone who has never set up a website like this
+before. Follow every step in order — don't skip any.
 
-## Features
-- Browse trekking packages, destinations, and a photo gallery
-- Register / log in as a customer
-- Book a trekking package (choose from a dropdown or click "Book Now" on a
-  specific package)
-- View your booking history and leave a review from your Profile page
-- Public testimonials section showing customer reviews with star ratings
-- Contact form (messages are saved and viewable by the admin)
-- Admin panel to manage packages, bookings, users, reviews, gallery images,
-  and contact messages
+---
 
-## What you need
-Download and install **XAMPP** (includes PHP, MySQL, and phpMyAdmin all in one):
-https://www.apachefriends.org/download.html
+## Step 1: Download and Install XAMPP
 
-Choose the Windows installer, run it, and accept the default options
-(default install location: `C:\xampp`).
+XAMPP is a free program that gives your computer everything needed to run
+this website (a web server, PHP, and a MySQL database) in one install.
 
-## 1. Get the project files into XAMPP's folder
+1. Go to: https://www.apachefriends.org/download.html
+2. Click the **Download** button for the **Windows** version
+3. Once downloaded, double-click the installer file
+4. If Windows shows a security warning, click **Yes** or **Run anyway**
+5. Click through the installer using all the **default options** — you
+   don't need to change anything. Just keep clicking **Next**
+6. When it finishes, click **Finish**
 
-After cloning or downloading this repository as a ZIP, copy the entire
-project folder into:
+The install location will be `C:\xampp` — remember this, you'll need it.
 
-```
-C:\xampp\htdocs\
-```
+---
 
-So the path looks like:
-```
-C:\xampp\htdocs\friday\index.php
-```
-(rename the folder to `friday` if it's called something else after cloning)
+## Step 2: Get the Project Files
 
-## 2. Start Apache and MySQL
+If you received this project as a **ZIP file**:
+1. Right-click the ZIP file
+2. Click **Extract All...**
+3. Choose to extract it somewhere you'll remember (like your Desktop)
 
-1. Open the **XAMPP Control Panel** (search for it in the Start menu)
-2. Click **Start** next to both **Apache** and **MySQL**
-3. Both should turn green — if either shows red/fails to start, another
-   program (like Skype or an existing MySQL install) may be using the same
-   port; close it and try again
+If you're using **Git** to clone the repository:
+1. Open Command Prompt
+2. Run: `git clone <the repository URL>`
 
-## 3. Create the database and import the data
+Either way, you should now have a folder containing files like `index.php`,
+`login.php`, a `css` folder, an `admin` folder, and so on.
 
-1. Open your browser and go to: **http://localhost/phpmyadmin**
-2. Click **New** in the left sidebar
-3. Enter database name: `trekking_db`, then click **Create**
-4. Click on `trekking_db` in the left sidebar, then click the **Import** tab
-5. Click **Choose File**, and select `database/trekking_db.sql` from the
-   project folder (e.g. `C:\xampp\htdocs\friday\database\trekking_db.sql`)
-6. Scroll down and click **Import** (leave all other settings as default)
+---
 
-You should see a success message, and 6 tables should now appear in the
-left sidebar: `users`, `packages`, `bookings`, `reviews`, `gallery`, `messages`.
+## Step 3: Move the Project Into XAMPP's Folder
 
-## 4. Run the website
+1. Open **File Explorer**
+2. Navigate to `C:\xampp\htdocs`
+3. Copy your entire project folder into `C:\xampp\htdocs`
+4. Make sure the folder is directly inside `htdocs` — for example:
+   ```
+   C:\xampp\htdocs\friday\index.php
+   ```
+   (if your folder has a different name than "friday", that's fine — just
+   remember what it's called, you'll need it in Step 6)
 
-Open your browser and go to:
+---
 
-```
-http://localhost/friday/index.php
-```
+## Step 4: Start the Server
 
-(replace `friday` with whatever you named the folder in `htdocs`)
+1. Open the **Start Menu** and search for **XAMPP Control Panel**
+2. Open it
+3. You'll see a list including **Apache** and **MySQL**, each with a
+   **Start** button next to them
+4. Click **Start** next to **Apache**
+5. Click **Start** next to **MySQL**
+6. Both should turn **green** with a status showing "Running"
 
-Admin panel:
-```
-http://localhost/friday/admin/login.php
-```
+**If Apache won't start (stays red):** something else on your computer
+(like Skype) might be using the same port. Close other programs and try
+again, or see the "Troubleshooting" section at the bottom of this guide.
 
-## Accounts
+---
 
-**Admin** (manage packages, bookings, users, reviews, gallery, messages):
+## Step 5: Create the Database
 
-| Field    | Value                     |
-|----------|---------------------------|
-| Email    | admin@tivetravels.com     |
-| Password | Admin@123                 |
+1. Open your web browser (Chrome, Firefox, Edge — any is fine)
+2. Go to this address: `http://localhost/phpmyadmin`
+3. You'll see a page called **phpMyAdmin**
+4. On the left sidebar, click **New**
+5. In the box that appears, type: `trekking_db`
+6. Click the **Create** button
 
-**Customer account:** register your own at
-`http://localhost/friday/register.php` to test booking a package and
-leaving a review.
+You should now see `trekking_db` appear in the left sidebar.
 
-## Notes
+---
 
-- XAMPP's MySQL uses username `root` with **no password** by default, which
-  matches what `includes/connection.php` expects — no changes needed there.
-- If Apache won't start because port 80 is already in use, open the XAMPP
-  Control Panel → click **Config** next to Apache → **Apache (httpd.conf)**
-  → change `Listen 80` to `Listen 8080`, then visit
-  `http://localhost:8080/friday/index.php` instead.
-- To stop the site, just click **Stop** on Apache and MySQL in the Control
-  Panel — no terminal commands needed.
+## Step 6: Import the Website's Data
+
+1. Still in phpMyAdmin, click on `trekking_db` in the left sidebar (if you're
+   not already viewing it)
+2. Click the **Import** tab at the top
+3. Click **Choose File**
+4. Navigate to your project folder, then into the `database` folder, and
+   select the file named `trekking_db.sql`
+   (full path example: `C:\xampp\htdocs\friday\database\trekking_db.sql`)
+5. Scroll to the bottom of the page and click the **Import** button
+6. Wait a few seconds — you should see a green success message
+
+You should now see **7 tables** listed on the left: `bookings`, `gallery`,
+`hotels`, `messages`, `packages`, `reviews`, `users`.
+
+---
+
+## Step 7: Open the Website
+
+1. Open your web browser
+2. Go to: `http://localhost/friday/index.php`
+   (replace "friday" with whatever your folder is actually called)
+
+You should see the Tive Travels homepage!
+
+**Admin panel:** `http://localhost/friday/admin/login.php`
+
+---
+
+## Login Details
+
+**Admin account** (can manage packages, bookings, gallery, reviews, users,
+and messages):
+
+| Field    | Value                  |
+|----------|------------------------|
+| Email    | admin@tivetravels.com  |
+| Password | Admin@123              |
+
+**Customer account:** You don't have one yet — create your own by going to
+`http://localhost/friday/register.php` and filling in the form. Then you
+can try booking a package and leaving a review.
+
+---
+
+## What You Can Try
+
+- Browse trekking packages and click "View & Book" on one
+- Register an account, then book a package (you can add a hotel too)
+- Leave a review for a package you've booked (from your Profile page)
+- Log in as admin and check out the Bookings, Packages, Gallery, Reviews,
+  Messages, and Users pages in the sidebar
+- Try confirming or cancelling a booking as admin
+
+---
+
+## Troubleshooting
+
+**"This site can't be reached" or blank page:**
+Make sure both Apache and MySQL show green/"Running" in the XAMPP Control
+Panel (Step 4). If they're not running, the website can't work.
+
+**Apache won't turn green / shows an error about port 80:**
+Another program on your computer is using the same port. In the XAMPP
+Control Panel, click **Config** next to Apache → **Apache (httpd.conf)**.
+A text file will open — find the line that says `Listen 80` and change it
+to `Listen 8080`. Save the file, restart Apache, then visit
+`http://localhost:8080/friday/index.php` instead (note the `:8080`).
+
+**"Database Connection Failed" error when opening the site:**
+This means MySQL isn't running, or the database wasn't created/imported
+correctly. Go back to Step 4 (make sure MySQL is green) and Step 5-6
+(make sure `trekking_db` exists and has 7 tables).
+
+**Uploaded gallery images don't show up:**
+Make sure you're logged in as admin when uploading, and that the file is
+a JPG, PNG, or WEBP under 2MB.
+
