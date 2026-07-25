@@ -9,8 +9,28 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 
 $message = "";
 
+// Delete Handler
+if (isset($_GET['delete'])) {
+    $delete_id = (int) $_GET['delete'];
+    $stmt = $conn->prepare("SELECT image_path FROM gallery WHERE id = ?");
+    $stmt->bind_param("i", $delete_id);
+    $stmt->execute();
+    $row = $stmt->get_result()->fetch_assoc();
+
+    if ($row) {
+        $file_path = "../" . $row['image_path'];
+        if (file_exists($file_path)) {
+            unlink($file_path);
+        }
+        $del = $conn->prepare("DELETE FROM gallery WHERE id = ?");
+        $del->bind_param("i", $delete_id);
+        $del->execute();
+        $message = "Photo deleted successfully.";
+    }
+}
+
 // Image Upload Handler
-if (isset($_POST['upload_image'])) {
+if (isset($_POST['upload_image']))  {
     $caption = mysqli_real_escape_string($conn, $_POST['caption']);
     $target_dir = "../images/";
 
@@ -74,6 +94,19 @@ if (isset($_POST['upload_image'])) {
         .form-group label { display: block; margin-bottom: 0.4rem; }
         .form-group input { width: 100%; padding: 0.5rem; }
         .btn-upload { background: #e67e22; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .gallery-manage-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.2rem; max-width: 900px;
+        }
+        .gallery-manage-item {
+            background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        }
+        .gallery-manage-item img { width: 100%; height: 130px; object-fit: cover; display: block; }
+        .gallery-caption { padding: 0.6rem 0.7rem 0.2rem; font-size: 0.85rem; color: #333; }
+        .btn-delete-photo {
+            display: block; text-align: center; color: #c0392b; text-decoration: none; font-size: 0.82rem;
+            font-weight: 600; padding: 0.5rem; border-top: 1px solid #f0f0f0;
+        }
+        .btn-delete-photo:hover { background: #fde8e8; }
     </style>
 </head>
 <body>
@@ -111,6 +144,26 @@ if (isset($_POST['upload_image'])) {
                     </div>
                     <button type="submit" name="upload_image" class="btn-upload">Upload Photo</button>
                 </form>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem;">Existing Photos</h3>
+            <div class="gallery-manage-grid">
+                <?php
+                $gallery_photos = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
+                if ($gallery_photos && $gallery_photos->num_rows > 0):
+                    while ($g = $gallery_photos->fetch_assoc()):
+                ?>
+                    <div class="gallery-manage-item">
+                        <img src="../<?php echo htmlspecialchars($g['image_path']); ?>" alt="<?php echo htmlspecialchars($g['caption']); ?>">
+                        <p class="gallery-caption"><?php echo htmlspecialchars($g['caption']); ?></p>
+                        <a href="gallery.php?delete=<?php echo $g['id']; ?>" class="btn-delete-photo" onclick="return confirm('Delete this photo permanently?');">Delete</a>
+                    </div>
+                <?php
+                    endwhile;
+                else:
+                ?>
+                    <p style="color:#666;">No photos uploaded yet.</p>
+                <?php endif; ?>
             </div>
         </main>
     </div>
