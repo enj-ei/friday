@@ -312,12 +312,20 @@ if (isset($_POST['send_message'])) {
         <div class="gallery-container">
             <h1>Moments From Our Treks</h1>
             <div class="gallery-grid">
-                <div class="gallery-item"><img src="IMG_6504.JPG" alt="Trek 1"></div>
-                <div class="gallery-item"><img src="20260612143332423.jpg" alt="Trek 2"></div>
-                <div class="gallery-item"><img src="IMG_9956.PNG" alt="Trek 3"></div>
-                <div class="gallery-item"><img src="IMG_4682.JPG" alt="Trek 4"></div>
-                <div class="gallery-item"><img src="IMG_0133.PNG" alt="Trek 5"></div>
-                <div class="gallery-item"><img src="IMG_9956.PNG" alt="Trek 6"></div>
+                <?php
+                $gallery_images = $conn->query("SELECT * FROM gallery ORDER BY id DESC");
+                if ($gallery_images && $gallery_images->num_rows > 0):
+                    while ($img = $gallery_images->fetch_assoc()):
+                ?>
+                    <div class="gallery-item">
+                        <img src="<?php echo htmlspecialchars($img['image_path']); ?>" alt="<?php echo htmlspecialchars($img['caption']); ?>">
+                    </div>
+                <?php
+                    endwhile;
+                else:
+                ?>
+                    <p style="text-align:center; color:#666;">No photos in the gallery yet.</p>
+                <?php endif; ?>
             </div>
         </div>
     </section>

@@ -14,15 +14,28 @@ if (isset($_POST['upload_image'])) {
     $caption = mysqli_real_escape_string($conn, $_POST['caption']);
     $target_dir = "../images/";
 
-    $allowed_ext = ['jpg', 'jpeg', 'png', 'webp'];
-    $original_name = basename($_FILES["image"]["name"]);
-    $ext = strtolower(pathinfo($original_name, PATHINFO_EXTENSION));
-
-    $img_info = getimagesize($_FILES["image"]["tmp_name"]);
-
-    if (!in_array($ext, $allowed_ext) || $img_info === false) {
-        $message = "Only JPG, PNG, or WEBP image files are allowed.";
+    if (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+        switch ($_FILES['image']['error'] ?? UPLOAD_ERR_NO_FILE) {
+            case UPLOAD_ERR_INI_SIZE:
+            case UPLOAD_ERR_FORM_SIZE:
+                $message = "That file is too large. Maximum allowed size is 2MB.";
+                break;
+            case UPLOAD_ERR_NO_FILE:
+                $message = "Please choose a photo to upload.";
+                break;
+            default:
+                $message = "Upload failed. Please try again.";
+        }
     } else {
+        $allowed_ext = ['jpg', 'jpeg', 'png', 'webp'];
+        $original_name = basename($_FILES["image"]["name"]);
+        $ext = strtolower(pathinfo($original_name, PATHINFO_EXTENSION));
+
+        $img_info = getimagesize($_FILES["image"]["tmp_name"]);
+
+        if (!in_array($ext, $allowed_ext) || $img_info === false) {
+            $message = "Only JPG, PNG, or WEBP image files are allowed.";
+        } else {
         // Generate a unique, safe filename instead of trusting the uploaded name
         $file_name = uniqid('gallery_', true) . '.' . $ext;
         $target_file = $target_dir . $file_name;
@@ -38,6 +51,7 @@ if (isset($_POST['upload_image'])) {
             }
         } else {
             $message = "Failed to upload photo.";
+        }
         }
     }
 }
