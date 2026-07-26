@@ -9,7 +9,7 @@ customer activity.
 
 ## Academic Information
 
-This project was developed as a group assignment for the **bachelor in computer system and information technology** programme at **Quest international College, lalitpur, Nepal**, affiliated to **Pokhara university**
+This project was developed as a group assignment for the **Bachelor of Computer Systems and Information Technology.** programme at **Quest International College, Lalitpur, Nepal**, affiliated to **Pokhara University**
 
 ## Group Members
 
