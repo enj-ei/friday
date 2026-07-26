@@ -9,10 +9,7 @@ customer activity.
 
 ## Academic Information
 
-This project was developed as a group assignment for the **BSc (Hons)
-Computer Science with Artificial Intelligence** programme at **Quest
-College, Kathmandu, Nepal**, delivered in partnership with **Coventry
-University, UK**.
+This project was developed as a group assignment for the **bachelor in computer system and information technology** programme at **Quest international College, lalitpur, Nepal**, affiliated to **Pokhara university**
 
 ## Group Members
 
