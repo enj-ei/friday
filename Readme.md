@@ -16,7 +16,7 @@ This project was developed as a group assignment for the **bachelor in computer 
 - Anjee Tamang
 - Anjila Shrestha
 - Alisha Thapa
-- Rajiv Shrestha
+- Rajiv Maharjan
 
 ## Getting Started
 
